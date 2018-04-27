@@ -26,13 +26,15 @@ module ODS::Siret
         zipcode = record["fields"]["l6_normalisee"].split(" ", 2)[0]
         city    = record["fields"]["l6_normalisee"].split(" ", 2)[1]
         siret   = record["fields"]["siren"] + record["fields"]["nic"]
+        ape     = record["fields"]["apen700"]
 
         response.push({
           name: name,
           address: address,
           zipcode: zipcode,
           city: city,
-          siret: siret
+          siret: siret,
+          ape: ape
         })
       end
     end

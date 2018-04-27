@@ -42,14 +42,16 @@ Return:
       "address":"40 AVENUE DE LA LIBERATION",
       "zipcode":"57160",
       "city":"CHATEL ST GERMAIN",
-      "siret":"38785601600028"
+      "siret":"38785601600028",
+      "ape":"5829C"
     },
     {
       "name":"CRISALID EST",
       "address":"40 AVENUE DE LA LIBERATION",
       "zipcode":"57160",
       "city":"CHATEL ST GERMAIN",
-      "siret":"53422349000010"
+      "siret":"53422349000010",
+      "ape":"4669C"
     }
   ]
 }
