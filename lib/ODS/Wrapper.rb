@@ -1,7 +1,9 @@
-require "ODS/Wrapper/version"
+require "ODS/version"
+require "ODS/Data/Siret"
+
+require "json"
+require "httparty"
 
 module ODS
-  module Wrapper
-    # Your code goes here...
-  end
+  ODS_URL="https://data.opendatasoft.com/api/records/1.0/search"
 end

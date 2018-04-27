@@ -22,7 +22,38 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You can search siret and informations about companies with method :
+
+```ruby
+ODS::Siret.query(name, zipcode = "")
+```
+Return a JSON array of companies in case it matches existing companies.
+
+Example:
+```ruby
+ODS::Siret.query("crisalid", "57160")
+```
+Return:
+```json
+{
+  "siret":[
+    {
+      "name":"CRISALID",
+      "address":"40 AVENUE DE LA LIBERATION",
+      "zipcode":"57160",
+      "city":"CHATEL ST GERMAIN",
+      "siret":"38785601600028"
+    },
+    {
+      "name":"CRISALID EST",
+      "address":"40 AVENUE DE LA LIBERATION",
+      "zipcode":"57160",
+      "city":"CHATEL ST GERMAIN",
+      "siret":"53422349000010"
+    }
+  ]
+}
+```
 
 ## Development
 
