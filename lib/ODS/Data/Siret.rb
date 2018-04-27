@@ -5,7 +5,11 @@ module ODS::Siret
     if zipcode == ""
       query = {dataset:ODS::Siret::DATASET, q:"nomen_long:" + name}
     else
-      query = {dataset:ODS::Siret::DATASET, q:"nomen_long:" + name + " AND codpos:" + zipcode}
+      if zipcode.size == 2
+        query = {dataset:ODS::Siret::DATASET, q:"nomen_long:" + name + " AND depet:" + zipcode}
+      else
+        query = {dataset:ODS::Siret::DATASET, q:"nomen_long:" + name + " AND codpos:" + zipcode}
+      end
     end
 
     result = HTTParty.get(ODS::ODS_URL, query:query).body
