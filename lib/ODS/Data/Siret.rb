@@ -23,8 +23,13 @@ module ODS::Siret
       hash["records"].each do |record|
         name    = record["fields"]["l1_normalisee"]
         address = record["fields"]["l4_normalisee"]
-        zipcode = record["fields"]["l6_normalisee"].split(" ", 2)[0]
-        city    = record["fields"]["l6_normalisee"].split(" ", 2)[1]
+        if !record["fields"]["l6_normalisee"].nil?
+          zipcode = record["fields"]["l6_normalisee"].split(" ", 2)[0]
+          city    = record["fields"]["l6_normalisee"].split(" ", 2)[1]
+        else
+          zipcode = ""
+          city    = ""
+        end
         siret   = record["fields"]["siren"] + record["fields"]["nic"]
         ape     = record["fields"]["apen700"]
 
