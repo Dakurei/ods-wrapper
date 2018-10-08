@@ -15,7 +15,7 @@ module ODS::Siret
     result = HTTParty.get(ODS::ODS_URL, query:query).body
     hash = JSON.parse(result)
 
-    nhits = hash["nhits"]
+    nhits = hash.dig("nhits") || 0
 
     response = []
 
