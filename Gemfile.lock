@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ODS-Wrapper (0.1.5)
+    ODS-Wrapper (0.1.6)
       httparty (~> 0.13.7)
 
 GEM
@@ -25,4 +25,4 @@ DEPENDENCIES
   rake (~> 10.0)
 
 BUNDLED WITH
-   1.16.2
+   1.16.6
