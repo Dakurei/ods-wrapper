@@ -1,51 +1,58 @@
 module ODS::Siret
-  DATASET = "sirene@public"
+  DATASET = 'sirene_v3@public'.freeze
 
-  def self.query(name, zipcode = "")
-    if zipcode == ""
-      query = {dataset:ODS::Siret::DATASET, q:"nomen_long:" + name}
+  def self.query(name, zipcode = '')
+    base_query = "etatadministratifetablissement:Actif AND (denominationunitelegale:#{name} OR nomunitelegale:#{name})"
+
+    if zipcode == ''
+      query = {
+        dataset: ODS::Siret::DATASET,
+        q: base_query
+      }
     else
       if zipcode.size == 2
-        query = {dataset:ODS::Siret::DATASET, q:"nomen_long:" + name + " AND depet:" + zipcode}
+        query = {
+          dataset: ODS::Siret::DATASET,
+          q: "#{base_query} AND codedepartementetablissement:#{zipcode}"
+        }
       else
-        query = {dataset:ODS::Siret::DATASET, q:"nomen_long:" + name + " AND codpos:" + zipcode}
+        query = {
+          dataset: ODS::Siret::DATASET,
+          q: "#{base_query} AND codepostaletablissement:#{zipcode}"
+        }
       end
     end
 
     result = HTTParty.get(ODS::ODS_URL, query:query).body
-    hash = JSON.parse(result)
+    hash   = JSON.parse(result)
 
-    nhits = hash.dig("nhits") || 0
+    nhits = hash.dig('nhits') || 0
 
     response = []
 
     if nhits > 0
-      hash["records"].each do |record|
-        name    = record["fields"]["l1_normalisee"]
-        address = record["fields"]["l4_normalisee"]
-        if !record["fields"]["l6_normalisee"].nil?
-          zipcode = record["fields"]["l6_normalisee"].split(" ", 2)[0]
-          city    = record["fields"]["l6_normalisee"].split(" ", 2)[1]
-        else
-          zipcode = ""
-          city    = ""
-        end
-        siret   = record["fields"]["siren"] + record["fields"]["nic"]
-        ape     = record["fields"]["apen700"]
+      hash['records'].each do |record|
+        fields = record['fields']
+
+        name    = fields.dig('denominationunitelegale')? fields.dig('denominationunitelegale') : fields.dig('nomunitelegale') + ' ' + fields.dig('prenom1unitelegale')
+        address = fields.dig('adresseetablissement')
+        zipcode = fields.dig('codepostaletablissement')
+        city    = fields.dig('libellecommuneetablissement')
+        siret   = fields.dig('siret')
+        ape     = fields.dig('activiteprincipaleunitelegale').gsub('.', '')
 
         response.push({
-          name: name,
+          name:    name,
           address: address,
           zipcode: zipcode,
-          city: city,
-          siret: siret,
-          ape: ape
+          city:    city,
+          siret:   siret,
+          ape:     ape
         })
       end
     end
 
     return JSON.generate({ siret: response })
-
   end
 
 end

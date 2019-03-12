@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ODS-Wrapper (0.1.7)
+    ODS-Wrapper (0.2.0)
       httparty
 
 GEM
