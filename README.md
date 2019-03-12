@@ -57,6 +57,31 @@ Return:
 }
 ```
 
+```ruby
+ODS::Siret.reverse_query(siret)
+```
+Return a JSON array of companies in case it matches existing companies (But there should be only one)
+
+Example:
+```ruby
+ODS::Siret.reverse_query('38785601600028')
+```
+Return:
+```json
+{
+  "siret":[
+    {
+      "name":"CRISALID",
+      "address":"40 AV DE LA LIBERATION",
+      "zipcode":"57160",
+      "city":"CHATEL SAINT GERMAIN",
+      "siret":"38785601600028",
+      "ape":"5829C"
+    }
+  ]
+}
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
