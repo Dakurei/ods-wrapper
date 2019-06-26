@@ -7,18 +7,21 @@ module ODS::Siret
     if zipcode == ''
       query = {
         dataset: ODS::Siret::DATASET,
-        q: base_query
+        q: base_query,
+        rows: 25
       }
     else
       if zipcode.size == 2
         query = {
           dataset: ODS::Siret::DATASET,
-          q: "#{base_query} AND codedepartementetablissement:#{zipcode}"
+          q: "#{base_query} AND codedepartementetablissement:#{zipcode}",
+          rows: 25
         }
       else
         query = {
           dataset: ODS::Siret::DATASET,
-          q: "#{base_query} AND codepostaletablissement:#{zipcode}"
+          q: "#{base_query} AND codepostaletablissement:#{zipcode}",
+          rows: 25
         }
       end
     end
