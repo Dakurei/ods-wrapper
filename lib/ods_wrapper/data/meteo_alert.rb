@@ -1,22 +1,22 @@
-module ODS::MeteoAlert
+module OdsWrapper::MeteoAlert
   DATASET = 'risques-meteorologiques-copy@public'.freeze
 
   def self.query(dep = '')
     if dep == ''
       query = {
-        dataset: ODS::MeteoAlert::DATASET,
+        dataset: OdsWrapper::MeteoAlert::DATASET,
         q: '',
         rows: 10000
       }
     else
       query = {
-        dataset: ODS::MeteoAlert::DATASET,
+        dataset: OdsWrapper::MeteoAlert::DATASET,
         q: "dep:#{dep}",
         rows: 10000
       }
     end
 
-    result = HTTParty.get(ODS::ODS_URL, query:query).body
+    result = HTTParty.get(OdsWrapper::ODS_URL, query:query).body
     hash   = JSON.parse(result)
 
     if (hash.dig('nhits') || 0) > 0
