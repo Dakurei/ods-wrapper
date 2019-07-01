@@ -1,15 +1,15 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'ODS/version'
+require 'Ods/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'ODS-Wrapper'
-  spec.version       = ODS::VERSION
+  spec.name          = 'ods-wrapper'
+  spec.version       = Ods::VERSION
   spec.authors       = ['Maxime Palanchini']
   spec.email         = ['maxime.palanchini@gmail.com']
 
   spec.summary       = 'Ruby wrapper for opendatasoft service'
-  spec.homepage      = 'https://github.com/Dakurei/ODS-Wrapper'
+  spec.homepage      = 'https://github.com/Dakurei/ods-wrapper'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|

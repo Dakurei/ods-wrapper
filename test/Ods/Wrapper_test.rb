@@ -1,7 +1,7 @@
 require "test_helper"
 
-class ODS::WrapperTest < Minitest::Test
+class Ods::WrapperTest < Minitest::Test
   def test_that_it_has_a_version_number
-    refute_nil ::ODS::VERSION
+    refute_nil ::Ods::VERSION
   end
 end

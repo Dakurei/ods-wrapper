@@ -1,10 +1,10 @@
-require 'ODS/version'
-require 'ODS/Data/Siret'
-require 'ODS/Data/MeteoAlert'
+require 'Ods/version'
+require 'Ods/Data/Siret'
+require 'Ods/Data/MeteoAlert'
 
 require 'json'
 require 'httparty'
 
-module ODS
+module Ods
   ODS_URL= 'https://data.opendatasoft.com/api/records/1.0/search'.freeze
 end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ODS-Wrapper (0.3.0)
+    ods-wrapper (1.0.0)
       httparty
 
 GEM
@@ -21,9 +21,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ODS-Wrapper!
   bundler
   minitest
+  ods-wrapper!
   rake
 
 BUNDLED WITH

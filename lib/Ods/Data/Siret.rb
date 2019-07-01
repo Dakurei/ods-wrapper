@@ -1,4 +1,4 @@
-module ODS::Siret
+module Ods::Siret
   DATASET = 'sirene_v3@public'.freeze
 
   def self.query(name, zipcode = '')
@@ -6,27 +6,27 @@ module ODS::Siret
 
     if zipcode == ''
       query = {
-        dataset: ODS::Siret::DATASET,
+        dataset: Ods::Siret::DATASET,
         q: base_query,
         rows: 25
       }
     else
       if zipcode.size == 2
         query = {
-          dataset: ODS::Siret::DATASET,
+          dataset: Ods::Siret::DATASET,
           q: "#{base_query} AND codedepartementetablissement:#{zipcode}",
           rows: 25
         }
       else
         query = {
-          dataset: ODS::Siret::DATASET,
+          dataset: Ods::Siret::DATASET,
           q: "#{base_query} AND codepostaletablissement:#{zipcode}",
           rows: 25
         }
       end
     end
 
-    result = HTTParty.get(ODS::ODS_URL, query:query).body
+    result = HTTParty.get(Ods::ODS_URL, query:query).body
     hash   = JSON.parse(result)
 
     if (hash.dig('nhits') || 0) > 0
@@ -40,11 +40,11 @@ module ODS::Siret
 
   def self.reverse_query(siret)
     query = {
-      dataset: ODS::Siret::DATASET,
+      dataset: Ods::Siret::DATASET,
       q: "siret:#{siret}"
     }
 
-    result = HTTParty.get(ODS::ODS_URL, query:query).body
+    result = HTTParty.get(Ods::ODS_URL, query:query).body
     hash   = JSON.parse(result)
 
     if (hash.dig('nhits') || 0) > 0
