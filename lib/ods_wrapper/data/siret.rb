@@ -26,7 +26,10 @@ module OdsWrapper::Siret
       end
     end
 
-    result = HTTParty.get(OdsWrapper::ODS_URL, query:query).body
+    response = HTTParty.get(OdsWrapper::ODS_URL, query:query)
+    return JSON.generate( { error: 'Server temporarily inaccessible' } ) if response.code >= 500 && response.code <= 599
+
+    result = response.body
     hash   = JSON.parse(result)
 
     if (hash.dig('nhits') || 0) > 0
@@ -44,7 +47,10 @@ module OdsWrapper::Siret
       q: "siret:#{siret}"
     }
 
-    result = HTTParty.get(OdsWrapper::ODS_URL, query:query).body
+    response = HTTParty.get(OdsWrapper::ODS_URL, query:query)
+    return JSON.generate( { error: 'Server temporarily inaccessible' } ) if response.code >= 500 && response.code <= 599
+
+    result = response.body
     hash   = JSON.parse(result)
 
     if (hash.dig('nhits') || 0) > 0
