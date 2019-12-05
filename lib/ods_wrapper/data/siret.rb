@@ -70,7 +70,7 @@ module OdsWrapper::Siret
     hash['records'].each do |record|
       fields = record['fields']
 
-      name    = fields.dig('denominationunitelegale')? fields.dig('denominationunitelegale') : fields.dig('nomunitelegale') + ' ' + fields.dig('prenom1unitelegale')
+      name    = fields.dig('denominationunitelegale')? fields.dig('denominationunitelegale') : "#{fields.dig('nomunitelegale')} #{fields.dig('prenom1unitelegale')}".strip
       address = fields.dig('adresseetablissement')
       zipcode = fields.dig('codepostaletablissement')
       city    = fields.dig('libellecommuneetablissement')
