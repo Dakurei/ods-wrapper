@@ -76,6 +76,7 @@ module OdsWrapper::Siret
       city    = fields.dig('libellecommuneetablissement')
       siret   = fields.dig('siret')
       ape     = fields.dig('activiteprincipaleunitelegale').gsub('.', '')
+      geo     = fields.dig('geolocetablissement')
 
       response.push({
         name:    name,
@@ -83,7 +84,8 @@ module OdsWrapper::Siret
         zipcode: zipcode,
         city:    city,
         siret:   siret,
-        ape:     ape
+        ape:     ape,
+        geo:     geo
       })
     end
 
