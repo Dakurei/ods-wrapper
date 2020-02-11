@@ -70,13 +70,18 @@ module OdsWrapper::Siret
     hash['records'].each do |record|
       fields = record['fields']
 
+      # Fetched
       name    = fields.dig('denominationunitelegale')? fields.dig('denominationunitelegale') : "#{fields.dig('nomunitelegale')} #{fields.dig('prenom1unitelegale')}".strip
       address = fields.dig('adresseetablissement')
       zipcode = fields.dig('codepostaletablissement')
       city    = fields.dig('libellecommuneetablissement')
       siret   = fields.dig('siret')
+      siren   = fields.dig('siren')
       ape     = fields.dig('activiteprincipaleunitelegale').gsub('.', '')
       geo     = fields.dig('geolocetablissement')
+
+      # Calculated
+      vat     = (siren)? 'FR' + ( ( 12 + 3 * ( siren.to_i % 97 ) ) % 97 ).to_s.rjust(2, '0') + siren : ''
 
       response.push({
         name:    name,
@@ -84,7 +89,9 @@ module OdsWrapper::Siret
         zipcode: zipcode,
         city:    city,
         siret:   siret,
+        siren:   siren,
         ape:     ape,
+        vat:     vat,
         geo:     geo
       })
     end
