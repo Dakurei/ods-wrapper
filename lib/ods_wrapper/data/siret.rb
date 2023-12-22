@@ -1,5 +1,5 @@
 module OdsWrapper::Siret
-  DATASET = 'sirene_v3@public'.freeze
+  DATASET = 'economicref-france-sirene-v3@public'.freeze
 
   def self.query(name, zipcode = '')
     base_query = "etatadministratifetablissement:Actif AND (denominationunitelegale:#{name} OR nomunitelegale:#{name})"
